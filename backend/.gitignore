@@ -1,0 +1,63 @@
+# Ignore .env files to keep sensitive data out of version control
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+
+# Maven target directory
+target/
+
+# Gradle build directory
+build/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# Compiled Java class files
+*.class
+
+# Package-lock and node_modules (if using frontend with Spring Boot)
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Security keys and credentials
+*.keystore
+*.p12
+*.pem
+*.crt
+*.key
+
+# Spring Boot configuration
+application.properties
+application.yml
+application-dev.properties
+application-prod.properties
+application-*.yml
+
+# MacOS & Linux system files
+.DS_Store
+*.swp
