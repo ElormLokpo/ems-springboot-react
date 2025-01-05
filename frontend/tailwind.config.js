@@ -9,7 +9,16 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-  		colors: {}
+  		colors: {},
+		  gridTemplateColumns: {
+			// Simple 16 column grid
+			'14': 'repeat(14, minmax(0, 1fr))',
+			'16': 'repeat(16, minmax(0, 1fr))',
+
+		  },
+		  gridColumn: {
+			'span-14': 'span 14 / span 14',
+		  }
   	}
   },
   plugins: [require("tailwindcss-animate")],
