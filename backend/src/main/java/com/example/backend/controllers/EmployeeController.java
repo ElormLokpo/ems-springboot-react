@@ -17,6 +17,7 @@ import com.example.backend.utils.ResponseGen;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("employees")
+    @GetMapping(path="employees")
     public ResponseEntity<ResponseGen> getAllEmployees() {
         Collection<GetEmployeesDto> employees = employeeService.getAllEmployees();
         ResponseGen response = ResponseGen.builder()
@@ -45,7 +46,7 @@ public class EmployeeController {
     }
     
     @GetMapping(path="employees/{id}")
-    public ResponseEntity<ResponseGen> getEmployee(@RequestParam UUID id) {
+    public ResponseEntity<ResponseGen> getEmployee(@PathVariable UUID id) {
         Optional<EmployeeModel> employee = employeeService.getEmployee(id);
 
         ResponseGen response = ResponseGen.builder()
@@ -64,7 +65,7 @@ public class EmployeeController {
         ));
     }
     
-    @PostMapping("employees")
+    @PostMapping(path="employees")
     public ResponseEntity<ResponseGen> createEmployee(@RequestBody CreateEmployeeDto employee) {
         employeeService.createEmployee(employee);
 
@@ -77,8 +78,8 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping(path="employees/{id}")
-    public ResponseEntity<ResponseGen> deleteEmployee(@RequestParam UUID id) {
+    @DeleteMapping(path="employees/{id}")
+    public ResponseEntity<ResponseGen> deleteEmployee(@PathVariable UUID id) {
         employeeService.deleteEmployee(id);
 
         ResponseGen response = ResponseGen.builder()

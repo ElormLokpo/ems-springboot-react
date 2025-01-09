@@ -1,7 +1,7 @@
 package com.example.backend.model.employee;
 
 public enum EmployeeStatus {
-    acitve, 
+    active, 
     onLeave, 
     terminated
 }
