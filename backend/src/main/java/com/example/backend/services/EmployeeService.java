@@ -42,7 +42,7 @@ public class EmployeeService implements EmployeeDao {
                 .build();
     }
 
-    public EmployeeModel CreateEmployeeDtoToEmploye(CreateEmployeeDto employee) {
+    public EmployeeModel CreateEmployeeDtoToEmployee(CreateEmployeeDto employee) {
         return EmployeeModel.builder()
                 .firstName(employee.getFirstName())
                 .lastName(employee.getLastName())
@@ -83,7 +83,7 @@ public class EmployeeService implements EmployeeDao {
 
     @Override
     public Boolean createEmployee(CreateEmployeeDto employee) {
-        employeeRepository.save(CreateEmployeeDtoToEmploye(employee));
+        employeeRepository.save(CreateEmployeeDtoToEmployee(employee));
         return true;
     }
 
