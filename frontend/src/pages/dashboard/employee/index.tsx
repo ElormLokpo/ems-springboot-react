@@ -1,20 +1,27 @@
-import { CButton } from "./components/button";
-import { SearchInput } from "./components/input"
+import { CButton } from "../../../components/button";
+import { SearchInput } from "../../../components/input"
 import { SummaryStatistics } from "./components/summary-stats"
 import { FiSearch } from "react-icons/fi";
 import { MdFilterList } from "react-icons/md";
 import { IoIosAdd } from "react-icons/io";
-import { useContext, useState } from "react";
-import { ModalContext } from "@/context/modal-context";
-import { IModalContext } from "@/context/modal-context/type";
-import { AddEmployeeForm } from "./components/form/add-employee";
+import {  useEffect } from "react";
+
+import { allEmployeesQuery } from "@/services/api/employees";
+import { useNavigate } from "react-router-dom";
+import { APP_ROUTES, NAV_ROUTES } from "@/constants";
 
 export const EmployeePage = () => {
-    const {setModalContent, setModalState} = useContext(ModalContext) as IModalContext;
+    const  {data, isPending, isError, error} = allEmployeesQuery();
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        console.log("FROM BACKEND",data)
+
+
+    },[data])
 
     const handleAddEmployee = ()=>{
-        setModalState(true);
-        setModalContent(<AddEmployeeForm />);
+        navigate(NAV_ROUTES.EMPLOYEE_ADD_NAV);
     }
 
 
@@ -39,7 +46,7 @@ export const EmployeePage = () => {
                     </div>
                     <div className="flex gap-2 items-center">
                         <CButton style_type="outline" label="Filter" icon={<MdFilterList />} handler={()=>{}}/>
-                        <CButton style_type="filled" label="Add" icon={<IoIosAdd />} handler={handleAddEmployee} />
+                        <CButton style_type="filled" label="Add Employee" icon={<IoIosAdd />} handler={handleAddEmployee} />
                     </div>
                 </div>
             </div>
