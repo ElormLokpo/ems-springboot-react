@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
+@RequestMapping("/api/employees")
 public class EmployeeController {
     
     EmployeeService employeeService; 
@@ -34,7 +36,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping(path="employees")
+    @GetMapping
     public ResponseEntity<ResponseGen> getAllEmployees() {
         Collection<GetEmployeesDto> employees = employeeService.getAllEmployees();
         ResponseGen response = ResponseGen.builder()
@@ -46,7 +48,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
     
-    @GetMapping(path="employees/{id}")
+    @GetMapping(path="{id}")
     public ResponseEntity<ResponseGen> getEmployee(@PathVariable UUID id) {
         Optional<EmployeeModel> employee = employeeService.getEmployee(id);
 
@@ -66,7 +68,7 @@ public class EmployeeController {
         ));
     }
     
-    @PostMapping(path="employees")
+    @PostMapping
     public ResponseEntity<ResponseGen> createEmployee(@RequestBody CreateEmployeeDto employee) {
         employeeService.createEmployee(employee);
 
@@ -79,7 +81,7 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping(path="employees/{id}")
+    @DeleteMapping(path="{id}")
     public ResponseEntity<ResponseGen> deleteEmployee(@PathVariable UUID id) {
         employeeService.deleteEmployee(id);
 
