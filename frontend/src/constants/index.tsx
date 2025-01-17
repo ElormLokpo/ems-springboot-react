@@ -13,8 +13,9 @@ export const NAV_ROUTES={
     
 }
 
-export const API_ENDPOINT = 'http://localhost:8080'
+export const API_ENDPOINT = 'http://localhost:8080/api'
 export const API_ROUTES = {
     PING:"ping",
-    EMPLOYEES: "employees"
+    EMPLOYEES: "employees",
+    ORGANIZATION: "organizations"
 }

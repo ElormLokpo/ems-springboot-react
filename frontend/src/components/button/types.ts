@@ -6,6 +6,9 @@ export interface ICButton {
     label: string,
     size?: string,
     disabled?: boolean,
+    isLoading?: boolean, 
+    loadingText?: string,
+    type?:string
 
     handler: () => void
 }

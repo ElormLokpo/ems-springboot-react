@@ -19,9 +19,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
+
 @RestController
+@RequestMapping("/api/organizations")
 public class OrganizationController {
 
     OrganizationService orgService;
@@ -31,7 +36,12 @@ public class OrganizationController {
         this.orgService = orgService;
     }
 
-    @GetMapping("organizations")
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> handleOptions() {
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
     public ResponseEntity<ResponseGen> getAllOrganizations() {
         Collection<OrganizationModel> organizations = orgService.getAllOrganizations();
         ResponseGen response = ResponseGen.builder()
@@ -43,7 +53,7 @@ public class OrganizationController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping(path = "organizations/{id}")
+    @GetMapping(path = "{id}")
     public ResponseEntity<ResponseGen> getOrganization(@PathVariable UUID id) {
         Optional<OrganizationModel> organization = orgService.getOrganization(id);
         ResponseGen response = ResponseGen.builder()
@@ -51,7 +61,6 @@ public class OrganizationController {
                 .message("All organizations")
                 .data(organization)
                 .build();
-
 
         return organization.map(organizationS -> ResponseEntity.ok(response))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(
@@ -63,7 +72,7 @@ public class OrganizationController {
                                 .build()));
     }
 
-    @PostMapping("organizations")
+    @PostMapping
     public ResponseEntity<ResponseGen> createOrganization(@RequestBody CreateOrganizationDto organization) {
         Boolean createdOrganizationStatus = orgService.createOrganization(organization);
         ResponseGen response = ResponseGen.builder()
@@ -75,7 +84,7 @@ public class OrganizationController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping(path = "organizations/{id}")
+    @DeleteMapping(path = "{id}")
     public ResponseEntity<ResponseGen> deleteOrganization(@PathVariable UUID id) {
         Boolean deleteOrganizationStatus = orgService.deleteOrganization(id);
         ResponseGen response = ResponseGen.builder()
