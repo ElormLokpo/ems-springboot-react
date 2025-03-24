@@ -1,5 +1,7 @@
-export interface IInput{
-    label:string,
-    placeholder: string, 
-    
+export interface IInput {
+    label: string,
+    placeholder: string,
+    register: any,
+    errors: any,
+    name: string
 }
