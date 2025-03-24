@@ -32,8 +32,11 @@ const AuthForm = ({ setCurrentForm, currentForm }: any) => {
                         <div className="mb-1">
                             {authFields.map((item, index) => <div className="mb-2">
                                 <Input
+                                    name={item.title}
                                     key={index}
                                     label={item.label}
+                                    register={register}
+                                    errors={errors}
                                     placeholder={item.placeholder}
                                 />
                             </div>)}
