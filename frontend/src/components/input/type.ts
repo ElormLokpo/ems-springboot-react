@@ -3,5 +3,6 @@ export interface IInput {
     placeholder: string,
     register: any,
     errors: any,
-    name: string
+    name: string,
+    type?: any
 }
